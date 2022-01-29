@@ -31,6 +31,10 @@ async def lycia(client, message):
     chat_id = message.chat.id
     if msg.startswith("/") or msg.startswith("@"):
         message.continue_propagation()
+    headers = {
+        "x-rapidapi-key": "cf9e67ea99mshecc7e1ddb8e93d1p1b9e04jsn3f1bb9103c3f",
+        "x-rapidapi-host": "acobot-brainshop-ai-v1.p.rapidapi.com",
+    }
     if chat_id in en_chats:
         aura = msg
         aura = aura.replace("lycia", "Aco")
@@ -40,10 +44,6 @@ async def lycia(client, message):
             "key": "sX5A2PcYZbsN5EY6",
             "uid": "mashape",
             "msg": {test},
-        }
-        headers = {
-            "x-rapidapi-key": "cf9e67ea99mshecc7e1ddb8e93d1p1b9e04jsn3f1bb9103c3f",
-            "x-rapidapi-host": "acobot-brainshop-ai-v1.p.rapidapi.com",
         }
         response = requests.request("GET", url, headers=headers, params=querystring)
         result = response.text
@@ -58,11 +58,6 @@ async def lycia(client, message):
         result = result.replace("<a href=\\", "<a href =")
         result = result.replace("<\/a>", "</a>")
         red = result
-        try:
-            await LYCIA.send_chat_action(message.chat.id, "typing")
-            await message.reply_text(red)
-        except CFError as e:
-            print(e)
     else:
         u = msg.split()
         emj = extract_emojis(msg)
@@ -93,7 +88,7 @@ async def lycia(client, message):
             rm = msg
             lan = translator.detect(rm)
         aura = rm
-        if not "en" in lan and not lan == "":
+        if "en" not in lan and lan != "":
             aura = translator.translate(aura, lang_tgt="en")
 
         aura = aura.replace("lycia", "Aco")
@@ -103,10 +98,6 @@ async def lycia(client, message):
             "key": "sX5A2PcYZbsN5EY6",
             "uid": "mashape",
             "msg": {aura},
-        }
-        headers = {
-            "x-rapidapi-key": "cf9e67ea99mshecc7e1ddb8e93d1p1b9e04jsn3f1bb9103c3f",
-            "x-rapidapi-host": "acobot-brainshop-ai-v1.p.rapidapi.com",
         }
         response = requests.request("GET", url, headers=headers, params=querystring)
         result = response.text
@@ -121,13 +112,13 @@ async def lycia(client, message):
         result = result.replace("<a href=\\", "<a href =")
         result = result.replace("<\/a>", "</a>")
         red = result
-        if not "en" in lan and not lan == "":
+        if "en" not in lan and lan != "":
             pro = translator.translate(red, lang_tgt=lan[0])
-        try:
-            await LYCIA.send_chat_action(message.chat.id, "typing")
-            await message.reply_text(red)
-        except CFError as e:
-            print(e)
+    try:
+        await LYCIA.send_chat_action(message.chat.id, "typing")
+        await message.reply_text(red)
+    except CFError as e:
+        print(e)
 
 
 
@@ -165,10 +156,10 @@ async def redaura(client, message):
         rm = msg
         lan = translator.detect(rm)
     aura = rm
-    if not "en" in lan and not lan == "":
+    if "en" not in lan and lan != "":
         aura = translator.translate(aura, lang_tgt="en")
 
-   
+
     aura = aura.replace("lycia", "Aco")
     aura = aura.replace("Lycia", "Aco")
     querystring = {
@@ -194,7 +185,7 @@ async def redaura(client, message):
     result = result.replace("<a href=\\", "<a href =")
     result = result.replace("<\/a>", "</a>")
     red = result
-    if not "en" in lan and not lan == "":
+    if "en" not in lan and lan != "":
         red = translator.translate(red, lang_tgt=lan[0])
     try:
         await LYCIA.send_chat_action(message.chat.id, "typing")
@@ -244,7 +235,7 @@ async def redaura(client, message):
         rm = msg
         lan = translator.detect(rm)
     aura = rm
-    if not "en" in lan and not lan == "":
+    if "en" not in lan and lan != "":
         aura = translator.translate(aura, lang_tgt="en")
 
 
@@ -273,7 +264,7 @@ async def redaura(client, message):
     result = result.replace("<a href=\\", "<a href =")
     result = result.replace("<\/a>", "</a>")
     pro = result
-    if not "en" in lan and not lan == "":
+    if "en" not in lan and lan != "":
         red = translator.translate(red, lang_tgt=lan[0])
     try:
         await LYCIA.send_chat_action(message.chat.id, "typing")

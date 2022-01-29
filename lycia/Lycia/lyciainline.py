@@ -35,23 +35,23 @@ async def fetch(url):
 async def inline_query_handler(client, query):
     string = query.query.lower()
 
-    answers = []
     if string.split()[0] == "lycia":
-            if len(string.split()) < 2:
-                await client.answer_inline_query(
-                    query.id,
-                    results=answers,
-                    switch_pm_text='Lycia | Chat [text]',
-                    switch_pm_parameter='lycia',
-                )
-                return
-            lycia = string.split(None, 1)[1].strip()
-            Lycia = await lyciachatbot(answers, lycia)
+        answers = []
+        if len(string.split()) < 2:
             await client.answer_inline_query(
                 query.id,
-                results=Lycia,
-                cache_time=2
+                results=answers,
+                switch_pm_text='Lycia | Chat [text]',
+                switch_pm_parameter='lycia',
             )
+            return
+        lycia = string.split(None, 1)[1].strip()
+        Lycia = await lyciachatbot(answers, lycia)
+        await client.answer_inline_query(
+            query.id,
+            results=Lycia,
+            cache_time=2
+        )
    
 
 async def lyciachatbot(answers, text):
